@@ -1,11 +1,16 @@
 # lib/sql_query_analyzer/suggestion_engine.rb
 module SqlQueryAnalyzer
+
   class Suggestion
     attr_reader :severity, :message
 
     def initialize(severity, message)
       @severity = severity
       @message = message
+    end
+
+    def to_s
+      "[#{severity.to_s.upcase}] #{message}"
     end
   end
 

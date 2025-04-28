@@ -1,4 +1,6 @@
 # sql_query_analyzer.gemspec
+require_relative "lib/sql_query_analyzer/version"
+
 Gem::Specification.new do |spec|
   spec.name          = "sql_query_analyzer"
   spec.version       = SqlQueryAnalyzer::VERSION
@@ -13,8 +15,6 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["lib/**/*.rb"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "activerecord"
-  spec.add_dependency "activesupport"
 
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec", '~> 3.13'
 end
