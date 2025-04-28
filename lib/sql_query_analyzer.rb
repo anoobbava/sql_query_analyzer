@@ -1,8 +1,11 @@
-# frozen_string_literal: true
+# lib/sql_query_analyzer.rb
+require "active_support"
+require "active_record"
 
-require_relative "sql_query_analyzer/version"
+require "sql_query_analyzer/version"
+require "sql_query_analyzer/suggestion_engine"
+require "sql_query_analyzer/explain_analyzer"
 
 module SqlQueryAnalyzer
-  class Error < StandardError; end
-  # Your code goes here...
+  # Future configurations can go here
 end

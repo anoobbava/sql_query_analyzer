@@ -1,12 +1,14 @@
 # SqlQueryAnalyzer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sql_query_analyzer`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Gem Version](https://badge.fury.io/rb/sql_query_analyzer.svg)](https://badge.fury.io/rb/sql_query_analyzer)
 
-TODO: Delete this and the text above, and describe your gem
+Analyze your ActiveRecord queries easily with EXPLAIN and smart optimization suggestions. 🚀
+
+---
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your Gemfile:
 
 ```ruby
 gem 'sql_query_analyzer'
@@ -14,30 +16,50 @@ gem 'sql_query_analyzer'
 
 And then execute:
 
-    $ bundle install
+```ruby
+bundle install
+```
 
-Or install it yourself as:
+Or install it manually:
 
-    $ gem install sql_query_analyzer
+```
+gem install sql_query_analyzer
+```
 
 ## Usage
+In your Rails console or app:
 
-TODO: Write usage instructions here
+```ruby
+User.where(active: true).explain_with_suggestions
 
-## Development
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+✅ You will get:
 
-## Contributing
+- Full EXPLAIN ANALYZE plan
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/sql_query_analyzer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/sql_query_analyzer/blob/master/CODE_OF_CONDUCT.md).
+- Smart suggestions like:
+    - Missing JOIN conditions
+    - Sorting without indexes
+    - High row scan warnings
 
-## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+### Why Use This Gem?
 
-## Code of Conduct
+- Save time analyzing slow queries
+- Instant smart hints
+- Improve database performance faster
+- Beginner-friendly explanations
 
-Everyone interacting in the SqlQueryAnalyzer project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/sql_query_analyzer/blob/master/CODE_OF_CONDUCT.md).
+
+### Example Output
+
+```mathematica
+=== EXPLAIN ANALYZE OUTPUT ===
+Seq Scan on users ...
+
+=== SUGGESTIONS ===
+[CRITICAL] ⚡ Sequential Scan detected. Consider adding indexes.
+[WARNING] 🚨 Query uses SELECT *. Select only needed columns.
+```
