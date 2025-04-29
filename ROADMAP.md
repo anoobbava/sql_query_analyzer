@@ -23,6 +23,8 @@
 - [ ] Show file and line number where bad queries are called
 - [ ] Warn about missing WHERE clauses in JOINs
 - [ ] Add hint support (like FORCE INDEX for MySQL)
+- [ ] check the hinting of indexes and add the index option needed also check the indexes already exists in the code
+- [ ] composite indices and thier existence is there or not
 
 ---
 

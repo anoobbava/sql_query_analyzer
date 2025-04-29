@@ -5,7 +5,7 @@ require "active_record"
 require "sql_query_analyzer/version"
 require "sql_query_analyzer/suggestion_engine"
 require "sql_query_analyzer/explain_analyzer"
-require "sql_query_analyzer/explainer"
+require "sql_query_analyzer/execute"
 
 module SqlQueryAnalyzer
   # Future configurations can go here

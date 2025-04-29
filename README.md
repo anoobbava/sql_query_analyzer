@@ -26,6 +26,9 @@ Or install it manually:
 gem install sql_query_analyzer
 ```
 
+Need to create a new file in the config/initializers/sql_query_analyzer.rb
+
+
 ## Usage
 In your Rails console or app:
 
