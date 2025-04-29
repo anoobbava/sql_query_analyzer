@@ -63,3 +63,6 @@ Seq Scan on users ...
 [CRITICAL] ⚡ Sequential Scan detected. Consider adding indexes.
 [WARNING] 🚨 Query uses SELECT *. Select only needed columns.
 ```
+
+## Roadmap
+For a detailed roadmap, visit [our GitHub Pages roadmap](https://github.com/anoobbava/sql_query_analyzer/blob/master/ROADMAP.md).
