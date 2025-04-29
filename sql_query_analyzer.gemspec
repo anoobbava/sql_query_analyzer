@@ -16,5 +16,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
 
+  spec.add_dependency 'pastel', '~> 0.8.0'
+  spec.add_dependency "rails", "~> 6.0"
   spec.add_development_dependency "rspec", '~> 3.13'
 end

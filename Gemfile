@@ -12,7 +12,7 @@ gem "rspec", "~> 3.0"
 gem "rubocop", "~> 1.21"
 
 gem "rails", "~> 6.0"
-
+gem 'pastel', '~> 0.8.0'
 group :development, :test do
   gem "pry-rails"
 end
