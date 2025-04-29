@@ -40,10 +40,17 @@ module SqlQueryAnalyzer
 
         SuggestionRules.all.each do |rule|
           if rule[:matcher].call(line)
+
+            suggestion = Suggestion.new(rule[:severity], rule[:message])
+            if rule[:message].include?("Sequential Scan")
+              dynamic_msg = SequentialScanAdvisor.new(line).enhanced_message
+              suggestion = Suggestion.new(rule[:severity], dynamic_msg) if dynamic_msg
+            end
+
             warnings << {
               line_number: idx + 1,
               line_text: line,
-              suggestion: Suggestion.new(rule[:severity], rule[:message])
+              suggestion: suggestion
             }
           end
         end
