@@ -17,7 +17,7 @@
 
 ## Version 0.2.0
 
-- [ ] We need to have an opton to run only the Explain or Explain Analyze alone
+- [x] We need to have an opton to run only the Explain or Explain Analyze alone
 - [x] Need to Expand the rules and need to think of how we can do that effectively
 - [x] Show file and line number where bad queries are called
 - [x] Warn about missing WHERE clauses in JOINs

@@ -1,7 +1,7 @@
 # lib/sql_query_analyzer/explain_analyzer.rb
 module SqlQueryAnalyzer
   module ExplainAnalyzer
-    def explain_with_suggestions
+    def explain_with_suggestions(run: false)
 
       unless self.is_a?(ActiveRecord::Relation)
         puts "⚠️ Not an ActiveRecord Relation. Skipping explain_with_suggestions."
@@ -10,7 +10,7 @@ module SqlQueryAnalyzer
 
       raw_sql = self.to_sql
 
-      explain_output = SqlQueryAnalyzer::Execute.explain_sql(raw_sql)
+      explain_output = SqlQueryAnalyzer::Execute.explain_sql(raw_sql, run)
       engine = SqlQueryAnalyzer::SuggestionEngine.new(explain_output, raw_sql)
       suggestions = engine.analyze
 
