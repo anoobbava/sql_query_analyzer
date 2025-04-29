@@ -33,7 +33,7 @@ module SqlQueryAnalyzer
           message: "🔀 Merge Join used. Efficient if input is sorted properly; check indexes."
         },
         {
-          matcher: ->(line) { line.downcase.include?('cte') || line.downcase.include?('with') },
+          matcher: ->(line) { line&.match?(/^\s*WITH\s+\w+\s+AS\s*\(/i) },
           severity: :info,
           message: "🔧 CTE usage detected. Be aware CTEs can materialize (costly) in Postgres < 12."
         }
