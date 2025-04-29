@@ -67,5 +67,13 @@ Seq Scan on users ...
 [WARNING] 🚨 Query uses SELECT *. Select only needed columns.
 ```
 
+
+### Example Output using dummy queries
+
+Here is an example of the output response from the Gem:
+
+![Query Response](assets/response.png)
+
+
 ## Roadmap
 For a detailed roadmap, visit [our GitHub Pages roadmap](https://github.com/anoobbava/sql_query_analyzer/blob/master/ROADMAP.md).
