@@ -1,12 +1,10 @@
-name: Ruby
+name: Ruby CI
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
   rspec:
@@ -19,8 +17,11 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2
-          bundler-cache: true
+          ruby-version: '3.2'
+          bundler-cache: false  # avoids deployment mode
+
+      - name: Install dependencies
+        run: bundle install --jobs 4
 
       - name: Run RSpec
         run: bundle exec rspec
