@@ -22,41 +22,60 @@ And then execute:
 bundle install
 ```
 
-Or install it manually:
+Create an initializer file at `config/initializers/sql_query_analyzer.rb`:
 
+```ruby
+SqlQueryAnalyzer.configure do |config|
+  # Enable/disable the analyzer
+  config.enabled = true
+
+  # Specify which environments to run in (default: [:development])
+  config.environments = [:development]
+
+  # Set the log level (default: :info)
+  config.log_level = :info
+end
 ```
-gem install sql_query_analyzer
-```
-
-Need to create a new file in the config/initializers/sql_query_analyzer.rb
-
 
 ## Usage
-In your Rails console or app:
+
+### Automatic Query Monitoring
+
+The gem automatically monitors all ActiveRecord queries in your application and logs suggestions to your Rails logger. No additional code is needed!
+
+Example log output:
+```
+=== SQL Query Analysis ===
+Query: SELECT * FROM users WHERE active = true
+Warnings:
+  - [CRITICAL] Sequential Scan detected. Consider adding an index on users(active)
+  - [WARNING] Query uses SELECT *. Select only needed columns.
+=======================
+```
+
+### Manual Analysis
+
+You can also analyze specific queries manually:
 
 ```ruby
 User.where(active: true).explain_with_suggestions
-
 ```
-
 
 ✅ You will get:
 
 - Full EXPLAIN ANALYZE plan
-
 - Smart suggestions like:
     - Missing JOIN conditions
     - Sorting without indexes
     - High row scan warnings
 
-
 ### Why Use This Gem?
 
+- Automatic monitoring of all queries
 - Save time analyzing slow queries
 - Instant smart hints
 - Improve database performance faster
 - Beginner-friendly explanations
-
 
 ### Example Output
 
@@ -69,13 +88,11 @@ Seq Scan on users ...
 [WARNING] 🚨 Query uses SELECT *. Select only needed columns.
 ```
 
-
 ### Example Output using dummy queries
 
 Here is an example of the output response from the Gem:
 
 ![Query Response](assets/response.png)
-
 
 ## Code Coverage
 
@@ -85,7 +102,6 @@ The project maintains high test coverage to ensure reliability:
 - **Branch Coverage**: 80.7% (46/57 branches)
 
 Coverage is measured using SimpleCov and is checked on every pull request.
-
 
 ## Roadmap
 For a detailed roadmap, visit [our GitHub Pages roadmap](https://github.com/anoobbava/sql_query_analyzer/blob/master/ROADMAP.md).
