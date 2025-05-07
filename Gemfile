@@ -15,4 +15,5 @@ gem "rails", "~> 6.0"
 gem 'pastel', '~> 0.8.0'
 group :development, :test do
   gem "pry-rails"
+  gem 'sqlite3'
 end

@@ -15,8 +15,12 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["lib/**/*.rb"]
   spec.require_paths = ["lib"]
 
-
   spec.add_dependency 'pastel', '~> 0.8.0'
   spec.add_dependency "rails", "~> 6.0"
+  spec.add_dependency "activerecord", "~> 6.0"
+  spec.add_dependency "activesupport", "~> 6.0"
+  spec.add_dependency "logger", "~> 1.4"
+  
   spec.add_development_dependency "rspec", '~> 3.13'
+  spec.add_development_dependency "sqlite3", "~> 1.4"
 end
