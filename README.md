@@ -1,6 +1,8 @@
 # SqlQueryAnalyzer
 
 [![Gem Version](https://badge.fury.io/rb/sql_query_analyzer.svg)](https://badge.fury.io/rb/sql_query_analyzer)
+[![Code Coverage](https://img.shields.io/badge/coverage-99.4%25-brightgreen)](https://github.com/anoobbava/sql_query_analyzer)
+[![Branch Coverage](https://img.shields.io/badge/branch%20coverage-80.7%25-yellow)](https://github.com/anoobbava/sql_query_analyzer)
 
 Analyze your ActiveRecord queries easily with EXPLAIN and smart optimization suggestions. 🚀
 
@@ -73,6 +75,16 @@ Seq Scan on users ...
 Here is an example of the output response from the Gem:
 
 ![Query Response](assets/response.png)
+
+
+## Code Coverage
+
+The project maintains high test coverage to ensure reliability:
+
+- **Line Coverage**: 99.4% (167/168 lines)
+- **Branch Coverage**: 80.7% (46/57 branches)
+
+Coverage is measured using SimpleCov and is checked on every pull request.
 
 
 ## Roadmap
