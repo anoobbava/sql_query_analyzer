@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-require 'bundler/setup'
-Bundler.setup
+require "simplecov"
+SimpleCov.start do
+  add_filter "/spec/"
+  add_filter "/vendor/"
+  minimum_coverage 90
+  enable_coverage :branch
+end
 
-require 'logger'
-require 'active_support'
-require 'active_record'
-require 'sqlite3'
-require 'sql_query_analyzer'
+require "bundler/setup"
+require "logger"
+require "active_support/all"
+require "active_record"
+require "sqlite3"
+require "sql_query_analyzer"
 
 # Set up logging
 ActiveRecord::Base.logger = Logger.new($stdout)
-
-# Set up a test database
-ActiveRecord::Base.establish_connection(
-  adapter: 'sqlite3',
-  database: ':memory:'
-)
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -27,6 +27,13 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before(:suite) do
+    ActiveRecord::Base.establish_connection(
+      adapter: "sqlite3",
+      database: ":memory:"
+    )
   end
 
   # Clean up after each test

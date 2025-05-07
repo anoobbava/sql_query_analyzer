@@ -45,16 +45,16 @@ module SqlQueryAnalyzer
         SuggestionRules.all.each do |rule|
           next unless rule[:matcher].call(line)
 
-          suggestion = Suggestion.new(rule[:severity], rule[:message])
+          message = rule[:message]
           if rule[:message].include?("Sequential Scan")
             dynamic = SequentialScanAdvisor.new(full_plan).enhanced_message
-            suggestion = Suggestion.new(rule[:severity], dynamic) if dynamic
+            message = dynamic unless dynamic.nil?
           end
 
           warnings << {
             line_number: idx + 1,
             line_text:   line,
-            suggestion:  suggestion
+            suggestion:  Suggestion.new(rule[:severity], message)
           }
         end
       end
@@ -71,6 +71,7 @@ module SqlQueryAnalyzer
 
       presenter.display
       QueryPlanPresenter.classify_cost(total_cost)
+      warnings
     end
   end
 end
