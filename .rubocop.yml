@@ -1,13 +1,47 @@
 AllCops:
-  TargetRubyVersion: 2.6
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.0
 
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: double_quotes
+# Allow longer methods for complex analysis logic
+Metrics/MethodLength:
+  Max: 20
 
-Style/StringLiteralsInInterpolation:
-  Enabled: true
-  EnforcedStyle: double_quotes
+# Allow longer classes for core functionality
+Metrics/ClassLength:
+  Max: 150
 
+# Allow more complex methods for analysis logic
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Metrics/AbcSize:
+  Max: 25
+
+# Allow longer parameter lists for presenter classes
+Metrics/ParameterLists:
+  Max: 7
+
+# Allow longer blocks in specs
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+# Documentation not required for specs
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+# Allow constant definition in test blocks
+Lint/ConstantDefinitionInBlock:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+# Allow longer lines in gemspec description
 Layout/LineLength:
   Max: 120
+  Exclude:
+    - 'sql_query_analyzer.gemspec'

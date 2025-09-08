@@ -20,9 +20,9 @@ RSpec.describe SqlQueryAnalyzer::SuggestionRules do
     end
 
     describe 'rule matchers' do
-      it "detects Sequential Scan" do
-        rule = rules.find { |r| r[:message].include?("Sequential Scan") }
-        expect(rule[:matcher].call("Seq Scan on users")).to be true
+      it 'detects Sequential Scan' do
+        rule = rules.find { |r| r[:message].include?('Sequential Scan') }
+        expect(rule[:matcher].call('Seq Scan on users')).to be true
         expect(rule[:severity]).to eq(:critical)
       end
 
@@ -69,10 +69,10 @@ RSpec.describe SqlQueryAnalyzer::SuggestionRules do
     end
 
     it 'has valid severity levels' do
-      valid_severities = [:critical, :warning, :info]
+      valid_severities = %i[critical warning info]
       rules.each do |rule|
         expect(valid_severities).to include(rule[:severity])
       end
     end
   end
-end 
+end

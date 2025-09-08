@@ -5,21 +5,23 @@ require 'spec_helper'
 RSpec.describe SqlQueryAnalyzer::SuggestionEngine do
   let(:explain_output) do
     [
-      { "QUERY PLAN" => "Seq Scan on users (cost=0.00..10.00 rows=100 width=4)" }
+      { 'QUERY PLAN' => 'Seq Scan on users (cost=0.00..10.00 rows=100 width=4)' }
     ]
   end
-  let(:sql) { "SELECT * FROM users" }
+  let(:sql) { 'SELECT * FROM users' }
   let(:engine) { described_class.new(explain_output, sql) }
 
   describe '#analyze' do
     before do
       allow(SqlQueryAnalyzer::SuggestionRules).to receive(:all).and_return([
-        {
-          matcher: ->(line) { line.include?('Seq Scan') },
-          severity: :warning,
-          message: 'Sequential Scan detected'
-        }
-      ])
+                                                                             {
+                                                                               matcher: lambda { |line|
+                                                                                 line.include?('Seq Scan')
+                                                                               },
+                                                                               severity: :warning,
+                                                                               message: 'Sequential Scan detected'
+                                                                             }
+                                                                           ])
       allow(SqlQueryAnalyzer::SqlLevelRules).to receive(:evaluate).and_return([])
       allow(SqlQueryAnalyzer::SequentialScanAdvisor).to receive(:new).and_return(
         instance_double(SqlQueryAnalyzer::SequentialScanAdvisor, enhanced_message: 'Consider adding an index')
@@ -63,29 +65,29 @@ RSpec.describe SqlQueryAnalyzer::SuggestionEngine do
       engine.analyze
     end
 
-    context "when sequential scan is not detected" do
+    context 'when sequential scan is not detected' do
       let(:explain_output) do
         [
-          { "QUERY PLAN" => "Index Scan on users (cost=0.00..10.00 rows=100 width=4)" }
+          { 'QUERY PLAN' => 'Index Scan on users (cost=0.00..10.00 rows=100 width=4)' }
         ]
       end
 
-      it "uses the default message from the rule" do
+      it 'uses the default message from the rule' do
         warnings = engine.analyze
-        expect(warnings.none? { |w| w[:suggestion].message.include?("Sequential Scan") }).to be true
+        expect(warnings.none? { |w| w[:suggestion].message.include?('Sequential Scan') }).to be true
       end
     end
 
-    context "when sequential scan advisor returns nil" do
+    context 'when sequential scan advisor returns nil' do
       before do
         allow(SqlQueryAnalyzer::SequentialScanAdvisor).to receive(:new).and_return(
           instance_double(SqlQueryAnalyzer::SequentialScanAdvisor, enhanced_message: nil)
         )
       end
 
-      it "uses the default message from the rule" do
+      it 'uses the default message from the rule' do
         warnings = engine.analyze
-        expect(warnings.any? { |w| w[:suggestion].message.include?("Sequential Scan detected") }).to be true
+        expect(warnings.any? { |w| w[:suggestion].message.include?('Sequential Scan detected') }).to be true
       end
     end
   end
@@ -98,4 +100,4 @@ RSpec.describe SqlQueryAnalyzer::Suggestion do
       expect(suggestion.to_s).to eq('[WARNING] Test message')
     end
   end
-end 
+end

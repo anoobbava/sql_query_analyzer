@@ -25,4 +25,4 @@ RSpec.describe SqlQueryAnalyzer::Execute do
       end
     end
   end
-end 
+end

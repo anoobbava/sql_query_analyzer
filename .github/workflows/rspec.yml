@@ -9,6 +9,16 @@ on:
 jobs:
   rspec:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: ['3.0', '3.1', '3.2', '3.3']
+        rails: ['6.0', '6.1', '7.0', '7.1']
+        exclude:
+          # Rails 7.1 requires Ruby 3.1+
+          - ruby: '3.0'
+            rails: '7.1'
+            
+    name: Ruby ${{ matrix.ruby }} - Rails ${{ matrix.rails }}
 
     steps:
       - name: Checkout code
@@ -17,11 +27,26 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: ${{ matrix.ruby }}
           bundler-cache: false  # avoids deployment mode
 
       - name: Install dependencies
-        run: bundle install --jobs 4
+        env:
+          RAILS_VERSION: ${{ matrix.rails }}
+        run: |
+          gem install bundler
+          bundle config set --local gemfile Gemfile-ci
+          echo "source 'https://rubygems.org'" > Gemfile-ci
+          echo "gemspec" >> Gemfile-ci
+          echo "gem 'rails', '~> ${{ matrix.rails }}'" >> Gemfile-ci
+          echo "gem 'sqlite3', '~> 1.4'" >> Gemfile-ci
+          echo "gem 'rspec', '~> 3.0'" >> Gemfile-ci
+          echo "gem 'simplecov', require: false" >> Gemfile-ci
+          bundle install
 
       - name: Run RSpec
         run: bundle exec rspec
+        
+      - name: Run RuboCop
+        run: bundle exec rubocop --parallel
+        if: matrix.ruby == '3.2' && matrix.rails == '7.0'

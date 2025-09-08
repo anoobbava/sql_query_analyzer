@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module SqlQueryAnalyzer
+  # Evaluates SQL-level rules like SELECT * and JOIN without ON
   class SqlLevelRules
     def self.evaluate(sql)
       return [] unless sql
@@ -9,7 +12,7 @@ module SqlQueryAnalyzer
         warnings << {
           line_number: 'N/A',
           line_text: 'SELECT *',
-          suggestion: Suggestion.new(:warning, "🚨 Query uses SELECT *. Specify only needed columns for performance.")
+          suggestion: Suggestion.new(:warning, '🚨 Query uses SELECT *. Specify only needed columns for performance.')
         }
       end
 
@@ -17,7 +20,8 @@ module SqlQueryAnalyzer
         warnings << {
           line_number: 'N/A',
           line_text: 'JOIN without ON',
-          suggestion: Suggestion.new(:critical, "⚡ JOIN without ON detected. May cause massive row combinations (CROSS JOIN).")
+          suggestion: Suggestion.new(:critical,
+                                     '⚡ JOIN without ON detected. May cause massive row combinations (CROSS JOIN).')
         }
       end
 

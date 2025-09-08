@@ -3,6 +3,7 @@
 require 'pastel'
 
 module SqlQueryAnalyzer
+  # Presents query plan output with colored formatting and suggestions
   class QueryPlanPresenter
     def initialize(output:, warnings:, total_cost:, rows_estimate:, actual_time:, output_stream: $stdout)
       @output = output

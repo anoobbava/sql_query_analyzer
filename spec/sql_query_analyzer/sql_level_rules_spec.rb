@@ -50,4 +50,4 @@ RSpec.describe SqlQueryAnalyzer::SqlLevelRules do
       end
     end
   end
-end 
+end

@@ -16,9 +16,7 @@ RSpec.describe SqlQueryAnalyzer::ExplainAnalyzer do
   end
 
   after(:all) do
-    if ActiveRecord::Base.connection.table_exists?(:test_users)
-      ActiveRecord::Base.connection.drop_table :test_users
-    end
+    ActiveRecord::Base.connection.drop_table :test_users if ActiveRecord::Base.connection.table_exists?(:test_users)
     Object.send(:remove_const, :TestUser) if Object.const_defined?(:TestUser)
   end
 
@@ -32,7 +30,7 @@ RSpec.describe SqlQueryAnalyzer::ExplainAnalyzer do
 
     context 'when called on an ActiveRecord::Relation' do
       let(:relation) { TestUser.all }
-      
+
       before do
         allow(relation).to receive(:to_sql).and_return('SELECT * FROM test_users')
         allow(SqlQueryAnalyzer::Execute).to receive(:explain_sql).and_return('EXPLAIN output')
@@ -69,4 +67,4 @@ RSpec.describe SqlQueryAnalyzer::ExplainAnalyzer do
       end
     end
   end
-end 
+end
