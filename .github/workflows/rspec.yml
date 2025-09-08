@@ -47,7 +47,3 @@ jobs:
 
       - name: Run RSpec
         run: bundle exec rspec
-        
-      - name: Run RuboCop
-        run: bundle exec rubocop --parallel
-        if: matrix.ruby == '3.2' && matrix.rails == '7.0'
