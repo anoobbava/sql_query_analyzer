@@ -6,7 +6,18 @@
 
 Analyze your ActiveRecord queries easily with EXPLAIN and smart optimization suggestions. 🚀
 
+**✅ Supports Rails 6.0+ through Rails 7.1+**
+
 ---
+
+## Compatibility
+
+| Rails Version | Ruby Version | Status |
+|---------------|--------------|---------|
+| 6.0.x         | 3.0+         | ✅ Fully Supported |
+| 6.1.x         | 3.0+         | ✅ Fully Supported |
+| 7.0.x         | 3.0+         | ✅ Fully Supported |
+| 7.1.x         | 3.1+         | ✅ Fully Supported |
 
 ## Installation
 
