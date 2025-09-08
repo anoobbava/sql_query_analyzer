@@ -42,6 +42,7 @@ jobs:
           echo "gem 'sqlite3', '~> 1.4'" >> Gemfile-ci
           echo "gem 'rspec', '~> 3.0'" >> Gemfile-ci
           echo "gem 'simplecov', require: false" >> Gemfile-ci
+          echo "gem 'rubocop', '~> 1.21'" >> Gemfile-ci
           bundle install
 
       - name: Run RSpec
